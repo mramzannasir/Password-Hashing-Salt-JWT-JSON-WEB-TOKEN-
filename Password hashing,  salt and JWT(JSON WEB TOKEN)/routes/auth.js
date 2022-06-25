@@ -8,6 +8,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // Create a User using Post " ". Doesn't require any auth
+
+
+
+
+// this is for Json web token you  need to give some thing 
 const JWT_SECRET = "nasir";
 router.post(
   "/",
