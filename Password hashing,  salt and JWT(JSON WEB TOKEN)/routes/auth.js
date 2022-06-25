@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // Create a User using Post " ". Doesn't require any auth
-const JWT_SECRET = 'nasir';    
+const JWT_SECRET = "nasir";
 router.post(
   "/",
   [
@@ -32,6 +32,8 @@ router.post(
         .status(400)
         .json({ error: "Invalid email this email already exist" });
     }
+
+    // Creating an Hash form of password
     const salt = bcrypt.genSaltSync(10);
     secpass = await bcrypt.hash(req.body.password, salt);
 
@@ -41,13 +43,15 @@ router.post(
       password: secpass,
     });
 
+
+// creating an jsonwebtoken
     const data = {
-      user:{
-        id: user.id
-      }
-    }
-  
+      user: {
+        id: user.id,
+      },
+    };
     const authToken = jwt.sign(data, JWT_SECRET);
+    // Show your jsonwebtoken in your response json
     res.json(authToken);
   }
 );
